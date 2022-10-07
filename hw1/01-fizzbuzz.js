@@ -11,15 +11,15 @@ Use console.log() to write the proper output to the command line.
 
 const fizzbuzz = () => {
   for (let i = 0; i <= 100; i++) {
-    let thing_to_say = i;
+    let thingToSay = i;
     if (i % 3 === 0 && i % 5 === 0) {
-      thing_to_say = "fizzbuzz";
+      thingToSay = "fizzbuzz";
     } else if (i % 3 === 0) {
-      thing_to_say = "fizz";
+      thingToSay = "fizz";
     } else if (i % 5 === 0) {
-      thing_to_say = "buzz";
+      thingToSay = "buzz";
     }
-    console.log(thing_to_say);
+    console.log(thingToSay);
   }
 };
 
