@@ -1,7 +1,40 @@
-/** Exercise 01 - Coins **/
+/** Exercise 01 - Coins * */
 
 const calculateChange = (input) => {
-  // Add your code here
+  // Add your code here  let change = input
+  let change = input;
+  const dollar = Math.floor(input);
+  let quarter = 0;
+  let dime = 0;
+  let nickel = 0;
+  let penny = 0;
+
+  if (dollar === 0) {
+    change *= 100;
+  } else {
+    change = Math.round((input - dollar) * 100);
+  }
+
+  quarter = parseInt(change / 25, 10);
+  change %= 25;
+  console.log(quarter, change);
+  dime = parseInt(change / 10, 10);
+  change %= 10;
+  nickel = parseInt(change / 5, 10);
+  change %= 5;
+
+  let string =
+    'dollar: ' +
+    dollar +
+    ' quater: ' +
+    quarter +
+    ' dime: ' +
+    dime +
+    ' nickel: ' +
+    nickel +
+    ' penny: ' +
+    change;
+  return string;
 };
 
 // Sample Test Cases
