@@ -1,9 +1,9 @@
 /** Exercise 01 - Coins * */
 
 const calculateChange = (input) => {
-  // Add your code here  let change = input
-  let string = `${input} ===> `;
+  let string = ` $${input} ===> `;
   const verify = /^\d+(?:\.\d{0,2})$/;
+
   if (!verify.test(input)) {
     string += 'Error: incorrect format';
     return string;
@@ -12,6 +12,7 @@ const calculateChange = (input) => {
     string += 'Error: the number is too large';
     return string;
   }
+
   let change = input;
   const dollars = Math.floor(input);
   const money = {
@@ -21,7 +22,7 @@ const calculateChange = (input) => {
     nickel: 0,
     penny: 0
   };
-
+  // create a whole number from the decimal value the input
   if (dollars === 0) {
     change *= 100;
   } else {
@@ -35,9 +36,10 @@ const calculateChange = (input) => {
   money.nickel = parseInt(change / 5, 10);
   change %= 5;
   money.penny = change;
+
   Object.entries(money).forEach((item) => {
-    let value = item[1];
-    let key = item[0];
+    const value = item[1];
+    const key = item[0];
 
     if (value > 0) {
       string += `${value} `;
@@ -56,26 +58,6 @@ const calculateChange = (input) => {
       }
     }
   });
-  /*
-  for (const [key, value] of Object.entries(money)) {
-    if (value > 0) {
-      string += `${value} `;
-      if (key === 'penny') {
-        if (value > 1) {
-          string += 'pennies';
-        } else {
-          string += key;
-        }
-      } else {
-        string += key;
-        if (value > 1) {
-          string += 's';
-        }
-        string += ', ';
-      }
-    }
-  }
-  */
 
   return string;
 };
@@ -83,11 +65,11 @@ const calculateChange = (input) => {
 // Sample Test Cases
 console.log(calculateChange(4.62));
 // $4.62 ==> 4 dollars, 2 quarters, 1 dime, 2 pennies
-console.log(calculateChange(1.74));
+console.log(calculateChange(9.74));
 // $9.74 ==> 9 dollars, 2 quarters, 2 dimes, 4 pennies
 console.log(calculateChange(0.16));
 // $0.16 ==> 1 dime, 1 nickel, 1 penny
 console.log(calculateChange(15.11));
 // $15.11 ==> Error: the number is too large
 console.log(calculateChange('aba'));
-// $15.11 ==> Error: the number is too large
+//  ==> Error: incorrect format
