@@ -16,21 +16,24 @@ app.use(
 
 const getRoutes = (routes) => {
   let result = '';
-  if (routes === undefined) return result;
+  if (routes.length === 1) return result;
 
-  routes.forEach((elem) => {
-    if (elem !== '/favicon.ico') {
+  routes.forEach((elem, index) => {
+    if (elem !== '/favicon.ico' && index !== routes.length - 1) {
       result += `<li style ="margin-left: 15px">\t${elem}</li>`;
     }
   });
 
   return result;
 };
-app.get('*', (req, res) => {
-  const routes = getRoutes(req.session.urlList, 1);
 
+app.use((req, res, next) => {
   if (req.session.urlList) req.session.urlList.push(req.url);
   else req.session.urlList = [req.url];
+  next();
+});
+app.get('*', (req, res) => {
+  const routes = getRoutes(req.session.urlList);
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write(`<br><span">Currently on route: ${req.url}</span><br><br>`);
