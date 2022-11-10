@@ -18,7 +18,7 @@ const routes = [
   'redirected',
   'cache',
   'cookie',
-  'other',
+  'other'
 ];
 
 let getRoutes = () => {
@@ -35,12 +35,46 @@ app.get('/', (req, res) => {
   let routeResults = getRoutes();
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write(`<h1>Exercise 04</h1>`);
+  res.write('<h1>Exercise 04</h1>');
   res.write(`<ul> ${routeResults} </ul>`);
   res.end();
 });
 
-app.get('/welcome', (req, res) => {});
+app.get('/welcome', (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<h1>Welcome to hw4-routing with express</h1>');
+  res.end();
+});
+app.get('/redirect', (req, res) => {
+  res.redirect(302, '/redirected');
+  res.end();
+});
+app.get('/redirected', (req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<h1>Redirected</h1>');
+  res.end();
+});
+app.get('/cache', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/html',
+    'Cache-control': 'max-age = 86400'
+  });
+  res.write('<h1>This resource was cached</h1>');
+  res.end();
+});
+app.get('/cookie', (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/html',
+    'Set-Cookie': 'hello=world'
+  });
+  res.write('<h1>Cookies... yum</h1>');
+  res.end();
+});
+app.get('*', (req, res) => {
+  res.writeHead(404, { 'Content-Type': 'text/html' });
+  res.write(`<h1>404 http://localhost:${port}${req.url} not found</h1>`);
+  res.end();
+});
 
 // Add your code here
 
